@@ -57,3 +57,18 @@
     margin-bottom: 25px;
     text-transform: uppercase;
 }
+
+.in-video-continue {
+    background-color: #107e93 !important;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.in-video-continue:hover {
+    background-color: #0e6a7b;
+}
