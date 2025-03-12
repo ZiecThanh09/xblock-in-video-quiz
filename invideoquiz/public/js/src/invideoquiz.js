@@ -151,5 +151,50 @@ function InVideoQuizXBlock(runtime, element) {
             });
           }
         });
+  }
+  function setUpStudentView(component) {
+    var componentIsVideo = component.data('id').indexOf(videoId) !== -1;
+    if (componentIsVideo) {
+        video = $('.video', component);
+    } else {
+        $.each(problemTimesMap, function (time, componentId) {
+            if (component.data('id').indexOf(componentId) !== -1) {
+                component.addClass('in-video-problem-wrapper');
+                var problemView = $('.xblock-student_view', component);
+                problemView.append(extraVideoButton).addClass('in-video-problem').hide();
+
+                // Hide the "Continue" button by default
+                $('.in-video-continue', problemView).hide();
+
+                // Check problem status
+                listenForProblemSubmission(problemView, componentId);
+            }
+        });
     }
+  }
+  function listenForProblemSubmission(problemView, problemId) {
+    var problemBlock = $('.xblock[data-id*="' + problemId + '"]');
+
+    function updateButtonVisibility(attempts, maxAttempts, isCorrect) {
+        if (isCorrect || attempts >= maxAttempts) {
+            $('.in-video-continue', problemView).show();
+        } else {
+            $('.in-video-continue', problemView).hide();
+        }
+    }
+
+    // Capture problem submission event from Open edX problem block
+    $(document).on('problem:submit', function (event, data) {
+        if (data && data.problem_id && data.problem_id.includes(problemId)) {
+            var attempts = data.attempts || 0;
+            var maxAttempts = problemBlock.data('max_attempts') || 2;
+            var isCorrect = data.correct || false;
+
+            // Update button visibility based on problem status
+            updateButtonVisibility(attempts, maxAttempts, isCorrect);
+        }
+    });
+  }
+
+
 }
