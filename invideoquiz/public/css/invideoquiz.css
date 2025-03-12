@@ -55,10 +55,7 @@
     float: right;
     height: 40px;
     margin-bottom: 25px;
-    text-transform: uppercase;
-}
-
-.in-video-continue {
+    text-transform: uppercase;    
     background-color: #107e93 !important;
     color: white;
     padding: 10px 20px;
@@ -68,6 +65,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
 }
+
 
 .in-video-continue:hover {
     background-color: #0e6a7b;
