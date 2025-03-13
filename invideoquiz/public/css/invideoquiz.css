@@ -56,7 +56,7 @@
     height: 40px;
     margin-bottom: 25px;
     text-transform: uppercase;    
-    background-image: linear-gradient(#107e93, #107e93)
+    background-image: linear-gradient(#107e93, #107e93) !important;
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
@@ -67,5 +67,5 @@
 }
 
 .in-video-continue:hover {
-    background-color: #0e6a7b;
+    background-image: linear-gradient(#08b1d3, #13aac9) !important;
 }
