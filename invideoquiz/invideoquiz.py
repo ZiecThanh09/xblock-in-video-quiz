@@ -10,6 +10,7 @@ from xblock.core import XBlock
 from xblock.fields import Scope
 from xblock.fields import String
 from xblock.validation import ValidationMessage
+from xblock.fields import Integer
 
 try:
     from web_fragments.fragment import Fragment
@@ -80,6 +81,19 @@ class InVideoQuizXBlock(StudioEditableXBlockMixin, XBlock):
     editable_fields = [
         'video_id',
         'timemap',
+    ]
+
+    countdown_time = Integer(
+        display_name=_('Countdown Time (seconds)'),
+        default=10,
+        scope=Scope.settings,
+        help=_('Time in seconds before the quiz closes automatically.')
+    )
+
+    editable_fields = [
+        'video_id',
+        'timemap',
+        'countdown_time',  # Thêm field mới
     ]
 
     def validate_field_data(self, validation, data):

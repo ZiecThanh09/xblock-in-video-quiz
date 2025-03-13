@@ -64,13 +64,14 @@ function InVideoQuizXBlock(runtime, element) {
         $.each(problemTimesMap, function (time, componentId) {
             if (component.data('id').indexOf(componentId) !== -1) {
                 component.addClass('in-video-problem-wrapper');
-                var countdownTimer = '<div class="countdown-timer">' + countdownDuration + '</div>';
-                $('.xblock-student_view', component).append(countdownTimer).addClass('in-video-problem').hide();
+                var countdownInput = '<label for="countdown-time">Countdown Time (seconds):</label>' +
+                                     '<input type="number" class="countdown-time" min="1" max="60" value="10">';
+                var countdownTimer = '<div class="countdown-timer">10</div>';
+                $('.xblock-student_view', component).append(countdownInput + countdownTimer).addClass('in-video-problem').hide();
             }
         });
     }
-  }
-
+}
   function getDimensions() {
       var position = $('.tc-wrapper', video).position().top;
       var height = $('.tc-wrapper', video).css('height');
