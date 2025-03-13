@@ -7,11 +7,12 @@ function InVideoQuizXBlock(runtime, element) {
   }
   var problemTimesMap = InVideoQuizXBlock.config[videoId];
   var studentMode = $('.in-video-quiz-block').data('mode') !== 'staff';
-  var extraVideoButton = '<button class="in-video-continue">Continue</button>';
+  // var extraVideoButton = '<button class="in-video-continue">Continue</button>';
   var video;
   var videoState;
 
   var knownDimensions;
+  var countdownDuration = 10;
 
   // Interval at which to check if video size has changed size
   // and the displayed problems needs to do the same
@@ -42,18 +43,32 @@ function InVideoQuizXBlock(runtime, element) {
       }
   });
 
+  // function setUpStudentView(component) {
+  //     var componentIsVideo = component.data('id').indexOf(videoId) !== -1;
+  //     if (componentIsVideo) {
+  //         video = $('.video', component);
+  //     } else {
+  //         $.each(problemTimesMap, function (time, componentId) {
+  //             if (component.data('id').indexOf(componentId) !== -1) {
+  //                 component.addClass('in-video-problem-wrapper');
+  //                 $('.xblock-student_view', component).append(extraVideoButton).addClass('in-video-problem').hide();
+  //             }
+  //         });
+  //     }
+  // }
   function setUpStudentView(component) {
-      var componentIsVideo = component.data('id').indexOf(videoId) !== -1;
-      if (componentIsVideo) {
-          video = $('.video', component);
-      } else {
-          $.each(problemTimesMap, function (time, componentId) {
-              if (component.data('id').indexOf(componentId) !== -1) {
-                  component.addClass('in-video-problem-wrapper');
-                  $('.xblock-student_view', component).append(extraVideoButton).addClass('in-video-problem').hide();
-              }
-          });
-      }
+    var componentIsVideo = component.data('id').indexOf(videoId) !== -1;
+    if (componentIsVideo) {
+        video = $('.video', component);
+    } else {
+        $.each(problemTimesMap, function (time, componentId) {
+            if (component.data('id').indexOf(componentId) !== -1) {
+                component.addClass('in-video-problem-wrapper');
+                var countdownTimer = '<div class="countdown-timer">' + countdownDuration + '</div>';
+                $('.xblock-student_view', component).append(countdownTimer).addClass('in-video-problem').hide();
+            }
+        });
+    }
   }
 
   function getDimensions() {
@@ -152,4 +167,20 @@ function InVideoQuizXBlock(runtime, element) {
         }
       });
   }
+  function startCountdown(problemElement, duration) {
+    var timerElement = $('.countdown-timer', problemElement);
+    var timeLeft = duration;
+    timerElement.text(timeLeft);
+
+    var countdown = setInterval(function () {
+        timeLeft--;
+        timerElement.text(timeLeft);
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            problemElement.hide();
+            $('.wrapper-downloads, .video-controls', video).show();
+            videoState.videoPlayer.play();
+        }
+    }, 1000);
+}
 }
