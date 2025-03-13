@@ -134,6 +134,7 @@ class InVideoQuizXBlock(StudioEditableXBlockMixin, XBlock):
         config = config.format(
             video_id=self.video_id,
             timemap=self.timemap,
+            countdown_time=self.countdown_time,
         )
         fragment.add_javascript(config)
         return fragment
