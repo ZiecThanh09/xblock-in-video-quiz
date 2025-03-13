@@ -69,3 +69,12 @@
 .in-video-continue:hover {
     background-image: linear-gradient(#08b1d3, #13aac9) !important;
 }
+
+.countdown-timer {
+    color: red;
+    font-size: 2.5rem;
+    font-weight: bold;
+    position: absolute;
+    top: 10%;
+    right: 10%;
+}

@@ -1,1 +1,7 @@
-<div class="in-video-quiz-block" data-videoid="{video_id}" data-mode='{user_mode}'></div>
+<div class="in-video-quiz-block" data-videoid="{video_id}" data-mode='{user_mode}'>
+    <div class="quiz-container" style="display: none;">
+        <label for="countdown-time">Countdown Time (seconds):</label>
+        <input type="number" class="countdown-time" min="1" max="60" value="{countdown_time}">
+        <div class="countdown-timer">{countdown_time}</div>
+    </div>
+</div>
