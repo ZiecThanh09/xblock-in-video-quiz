@@ -1,4 +1,4 @@
-/* Javascript for InVideoQuizXBlock with Countdown Timer */
+/* Javascript for InVideoQuizXBlock */
 function InVideoQuizXBlock(runtime, element) {
   $('.in-video-quiz-block').closest('.vert').hide();
   var videoId = $('.in-video-quiz-block').data('videoid');
@@ -10,7 +10,7 @@ function InVideoQuizXBlock(runtime, element) {
   var video;
   var videoState;
   var knownDimensions;
-  
+
   $(function () {
       $('#seq_content .vert-mod .vert, #course-content .vert-mod .vert').each(function () {
           var component = $(this);

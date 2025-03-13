@@ -78,11 +78,6 @@ class InVideoQuizXBlock(StudioEditableXBlockMixin, XBlock):
         multiline_editor=True,
     )
 
-    editable_fields = [
-        'video_id',
-        'timemap',
-    ]
-
     countdown_time = Integer(
         display_name=_('Countdown Time (seconds)'),
         default=10,
@@ -93,7 +88,7 @@ class InVideoQuizXBlock(StudioEditableXBlockMixin, XBlock):
     editable_fields = [
         'video_id',
         'timemap',
-        'countdown_time',  # Thêm field mới
+        'countdown_time',
     ]
 
     def validate_field_data(self, validation, data):
